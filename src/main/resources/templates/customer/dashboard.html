@@ -6,149 +6,376 @@
     <title>Customer Dashboard - E-commerce</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .shopping-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-hover {
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
+        }
+
+        .icon-float {
+            transition: transform 0.3s ease;
+        }
+
+        .icon-float:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .shopping-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shopping-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .shopping-btn:hover::before {
+            left: 100%;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 min-h-screen">
 <!-- Navigation -->
-<nav class="bg-white shadow-lg border-b border-gray-200">
+<nav class="glass-effect shadow-2xl border-b border-white/30 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex items-center">
-                <i class="fas fa-shopping-bag text-blue-600 text-2xl mr-3"></i>
-                <span class="text-xl font-bold text-gray-900">E-Commerce Store</span>
+            <div class="flex items-center animate-fade-in">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 shopping-gradient rounded-xl shadow-lg animate-bounce-gentle">
+                        <i class="fas fa-shopping-bag text-white text-xl"></i>
+                    </div>
+                    <div>
+                            <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                E-Commerce Store
+                            </span>
+                        <div class="text-xs text-gray-500">Your Shopping Destination</div>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <a href="/customer/products" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-shopping-cart mr-1"></i>Products
+
+            <div class="flex items-center space-x-2">
+                <a href="/customer/products" class="nav-item flex items-center text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-blue-50">
+                    <i class="fas fa-shopping-cart mr-2 icon-float"></i>Products
                 </a>
-                <a href="/customer/cart" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-shopping-bag mr-1"></i>Cart
+                <a href="/customer/cart" class="nav-item flex items-center text-gray-700 hover:text-purple-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-purple-50">
+                    <i class="fas fa-shopping-bag mr-2 icon-float"></i>Cart
                 </a>
-                <span class="text-gray-700">Welcome, Customer!</span>
-                <form th:action="@{/logout}" method="post" class="inline">
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
-                        <i class="fas fa-sign-out-alt mr-1"></i>Logout
-                    </button>
-                </form>
+
+                <div class="flex items-center space-x-4 ml-6 pl-6 border-l border-gray-200">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 shopping-gradient rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span class="text-gray-700 text-sm font-medium">Welcome, Customer!</span>
+                    </div>
+                    <form th:action="@{/logout}" method="post" class="inline">
+                        <button type="submit" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 
 <!-- Main Content -->
-<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+<main class="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8">
     <div class="px-4 py-6 sm:px-0">
         <!-- Welcome Header -->
-        <div class="border-b border-gray-200 pb-4 mb-6">
-            <h1 class="text-3xl font-bold leading-tight text-gray-900">
-                <i class="fas fa-home mr-3 text-blue-600"></i>
-                Welcome to Your Dashboard!
-            </h1>
-            <p class="mt-2 text-gray-600">Discover amazing products and manage your shopping experience</p>
+        <div class="mb-10 animate-slide-up">
+            <div class="flex items-center space-x-4 mb-6">
+                <div class="p-4 shopping-gradient rounded-2xl shadow-xl animate-pulse-slow">
+                    <i class="fas fa-home text-white text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-900">
+                        Welcome to Your Dashboard!
+                    </h1>
+                    <p class="text-lg text-gray-600 mt-2">Discover amazing products and manage your shopping experience</p>
+                </div>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
         </div>
 
         <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <!-- Browse Products -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="p-5">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-shopping-bag text-2xl text-blue-600"></i>
+            <div class="card-hover feature-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg">
+                                <i class="fas fa-shopping-bag text-white text-xl icon-float"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-600 uppercase tracking-wide">Products</p>
+                                <p class="text-2xl font-bold text-gray-900">Browse</p>
+                            </div>
                         </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Products</dt>
-                                <dd class="text-lg font-medium text-gray-900">Browse</dd>
-                            </dl>
+                        <div class="text-blue-500">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-arrow-right text-blue-600"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600 text-sm mb-4">Explore our curated collection of premium products</p>
                 </div>
-                <div class="bg-gray-50 px-5 py-3">
-                    <div class="text-sm">
-                        <a href="/customer/products" class="font-medium text-blue-700 hover:text-blue-900">
-                            Browse products
-                            <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 px-6 py-4">
+                    <a href="/customer/products" class="flex items-center justify-between text-blue-700 hover:text-blue-800 font-medium transition-colors duration-200">
+                        <span>Browse products</span>
+                        <i class="fas fa-arrow-right transform transition-transform duration-200 hover:translate-x-1"></i>
+                    </a>
                 </div>
             </div>
 
             <!-- Shopping Cart -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="p-5">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-shopping-cart text-2xl text-green-600"></i>
+            <div class="card-hover feature-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-lg">
+                                <i class="fas fa-shopping-cart text-white text-xl icon-float"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-600 uppercase tracking-wide">Shopping Cart</p>
+                                <p class="text-2xl font-bold text-gray-900">View</p>
+                            </div>
                         </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Shopping Cart</dt>
-                                <dd class="text-lg font-medium text-gray-900">View</dd>
-                            </dl>
+                        <div class="text-green-500">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-green-600"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600 text-sm mb-4">Review and manage your selected items</p>
                 </div>
-                <div class="bg-gray-50 px-5 py-3">
-                    <div class="text-sm">
-                        <a href="/customer/cart" class="font-medium text-green-700 hover:text-green-900">
-                            View cart
-                            <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
+                <div class="bg-gradient-to-r from-green-50 to-green-100 px-6 py-4">
+                    <a href="/customer/cart" class="flex items-center justify-between text-green-700 hover:text-green-800 font-medium transition-colors duration-200">
+                        <span>View cart</span>
+                        <i class="fas fa-arrow-right transform transition-transform duration-200 hover:translate-x-1"></i>
+                    </a>
                 </div>
             </div>
 
             <!-- Account -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="p-5">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-user text-2xl text-purple-600"></i>
+            <div class="card-hover feature-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl shadow-lg">
+                                <i class="fas fa-user text-white text-xl icon-float"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-600 uppercase tracking-wide">Account Status</p>
+                                <p class="text-2xl font-bold text-gray-900">Active</p>
+                            </div>
                         </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Account Status</dt>
-                                <dd class="text-lg font-medium text-gray-900">Active</dd>
-                            </dl>
+                        <div class="text-purple-500">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-crown text-purple-600"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600 text-sm mb-4">Premium member with exclusive benefits</p>
                 </div>
-                <div class="bg-gray-50 px-5 py-3">
-                    <div class="text-sm">
-                            <span class="font-medium text-purple-700">
-                                Member since 2024
-                                <i class="fas fa-check-circle ml-1"></i>
-                            </span>
+                <div class="bg-gradient-to-r from-purple-50 to-purple-100 px-6 py-4">
+                    <div class="flex items-center justify-between text-purple-700 font-medium">
+                        <span>Member since 2024</span>
+                        <i class="fas fa-check-circle"></i>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Welcome Message -->
-        <div class="bg-white shadow rounded-lg">
-            <div class="px-4 py-5 sm:p-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
-                    <i class="fas fa-star mr-2 text-yellow-500"></i>
+        <div class="feature-card rounded-2xl shadow-xl overflow-hidden animate-slide-up">
+            <div class="shopping-gradient px-8 py-6">
+                <h3 class="text-2xl font-bold text-white flex items-center">
+                    <i class="fas fa-star mr-3 animate-wiggle"></i>
                     Welcome to Our Store!
                 </h3>
-                <p class="text-gray-600 mb-4">
-                    We're excited to have you here! Start exploring our amazing collection of products.
-                </p>
+                <p class="text-blue-100 mt-2">We're excited to have you here! Start exploring our amazing collection of products.</p>
+            </div>
 
-                <!-- Quick Start Guide -->
-                <div class="bg-blue-50 rounded-lg p-4">
-                    <h4 class="text-md font-medium text-blue-900 mb-3">Quick Start Guide:</h4>
-                    <ul class="text-blue-800 space-y-2">
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Browse our product catalog</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Add items to your shopping cart</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Manage cart quantities and items</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Use the search feature to find specific products</li>
-                    </ul>
-                    <div class="mt-4">
-                        <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                            <i class="fas fa-rocket mr-2"></i>
-                            Start Shopping
+            <div class="p-8">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Quick Start Guide -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            <i class="fas fa-rocket mr-2 text-blue-500"></i>
+                            Quick Start Guide
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl">
+                                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-search text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Browse our product catalog</p>
+                                    <p class="text-sm text-gray-600">Discover thousands of quality products</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-plus text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Add items to your shopping cart</p>
+                                    <p class="text-sm text-gray-600">Build your perfect order</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl">
+                                <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-cog text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Manage cart quantities and items</p>
+                                    <p class="text-sm text-gray-600">Fine-tune your selections</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-yellow-50 to-orange-100 rounded-xl">
+                                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-bolt text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Use the search feature</p>
+                                    <p class="text-sm text-gray-600">Find exactly what you're looking for</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div class="flex flex-col justify-center items-center text-center space-y-6">
+                        <div class="w-32 h-32 shopping-gradient rounded-full flex items-center justify-center shadow-2xl animate-pulse-slow">
+                            <i class="fas fa-gift text-white text-4xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-2">Ready to Start Shopping?</h4>
+                            <p class="text-gray-600 mb-6">Explore our latest collection and find your perfect items!</p>
+                        </div>
+
+                        <a href="/customer/products" class="shopping-btn group px-8 py-4 text-white rounded-xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden">
+                            <i class="fas fa-rocket mr-3 group-hover:animate-bounce"></i>
+                            <span>Start Shopping Now</span>
                         </a>
+
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-shield-alt text-green-500 mr-1"></i>
+                                <span>Secure Shopping</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-truck text-blue-500 mr-1"></i>
+                                <span>Fast Delivery</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-heart text-red-500 mr-1"></i>
+                                <span>Quality Guaranteed</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
