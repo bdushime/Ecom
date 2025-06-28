@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - E-commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation Bar -->
+<nav class="bg-white shadow-lg border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <i class="fas fa-shopping-bag text-primary-600 text-2xl mr-3"></i>
+                <span class="text-xl font-bold text-gray-900">E-Commerce Admin</span>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="/admin/dashboard" class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
+                </a>
+                <a href="/admin/products" class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <i class="fas fa-box mr-1"></i>Products
+                </a>
+                <a href="/admin/customers" class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <i class="fas fa-users mr-1"></i>Customers
+                </a>
+
+                <div class="flex items-center space-x-3">
+                    <span class="text-gray-700 text-sm">Welcome, Admin!</span>
+                    <form th:action="@{/logout}" method="post" class="inline">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+        <!-- Page Header -->
+        <div class="border-b border-gray-200 pb-4 mb-6">
+            <h1 class="text-3xl font-bold leading-tight text-gray-900">
+                <i class="fas fa-tachometer-alt mr-3 text-primary-600"></i>
+                Admin Dashboard
+            </h1>
+            <p class="mt-2 text-gray-600">Manage your e-commerce platform</p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Products Count -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-box text-2xl text-blue-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Products</dt>
+                                <dd class="text-lg font-medium text-gray-900">10</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/admin/products" class="font-medium text-blue-700 hover:text-blue-900">
+                            Manage products
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Count -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-users text-2xl text-green-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Customers</dt>
+                                <dd class="text-lg font-medium text-gray-900">3</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/admin/customers" class="font-medium text-green-700 hover:text-green-900">
+                            View customers
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-plus-circle text-2xl text-purple-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Quick Actions</dt>
+                                <dd class="text-lg font-medium text-gray-900">Add Product</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/admin/products/add" class="font-medium text-purple-700 hover:text-purple-900">
+                            Add new product
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="bg-white shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                    <i class="fas fa-info-circle mr-2 text-primary-600"></i>
+                    Welcome to the Admin Dashboard
+                </h3>
+                <p class="text-gray-600 mb-4">
+                    From here you can manage your e-commerce store. Use the cards above to navigate to different sections:
+                </p>
+                <ul class="text-gray-600 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Manage products (view, add, edit, delete)</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>View customers and their shopping carts</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Add new products to your catalog</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Access the database console for advanced operations</li>
+                </ul>
+
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="/admin/products" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                        <i class="fas fa-box mr-2"></i>
+                        Manage Products
+                    </a>
+                    <a href="/h2-console" target="_blank" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        <i class="fas fa-database mr-2"></i>
+                        Database Console
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-200 mt-12">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="text-center text-gray-500 text-sm">
+            <p>&copy; 2024 E-Commerce Application. Built with Spring Boot and Tailwind CSS.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

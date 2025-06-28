@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - E-commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<nav class="bg-white shadow-lg border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <i class="fas fa-shopping-bag text-blue-600 text-2xl mr-3"></i>
+                <span class="text-xl font-bold text-gray-900">E-Commerce Store</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="/customer/products" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <i class="fas fa-shopping-cart mr-1"></i>Products
+                </a>
+                <a href="/customer/cart" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <i class="fas fa-shopping-bag mr-1"></i>Cart
+                </a>
+                <span class="text-gray-700">Welcome, Customer!</span>
+                <form th:action="@{/logout}" method="post" class="inline">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+        <!-- Welcome Header -->
+        <div class="border-b border-gray-200 pb-4 mb-6">
+            <h1 class="text-3xl font-bold leading-tight text-gray-900">
+                <i class="fas fa-home mr-3 text-blue-600"></i>
+                Welcome to Your Dashboard!
+            </h1>
+            <p class="mt-2 text-gray-600">Discover amazing products and manage your shopping experience</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Browse Products -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shopping-bag text-2xl text-blue-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Products</dt>
+                                <dd class="text-lg font-medium text-gray-900">Browse</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/customer/products" class="font-medium text-blue-700 hover:text-blue-900">
+                            Browse products
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping Cart -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shopping-cart text-2xl text-green-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Shopping Cart</dt>
+                                <dd class="text-lg font-medium text-gray-900">View</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/customer/cart" class="font-medium text-green-700 hover:text-green-900">
+                            View cart
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-user text-2xl text-purple-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Account Status</dt>
+                                <dd class="text-lg font-medium text-gray-900">Active</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                            <span class="font-medium text-purple-700">
+                                Member since 2024
+                                <i class="fas fa-check-circle ml-1"></i>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="bg-white shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                    <i class="fas fa-star mr-2 text-yellow-500"></i>
+                    Welcome to Our Store!
+                </h3>
+                <p class="text-gray-600 mb-4">
+                    We're excited to have you here! Start exploring our amazing collection of products.
+                </p>
+
+                <!-- Quick Start Guide -->
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h4 class="text-md font-medium text-blue-900 mb-3">Quick Start Guide:</h4>
+                    <ul class="text-blue-800 space-y-2">
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Browse our product catalog</li>
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Add items to your shopping cart</li>
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Manage cart quantities and items</li>
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Use the search feature to find specific products</li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                            <i class="fas fa-rocket mr-2"></i>
+                            Start Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

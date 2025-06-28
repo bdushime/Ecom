@@ -1,0 +1,147 @@
+<!-- customer/dashboard.html - Customer dashboard template -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/main :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Customer Dashboard</title>
+</head>
+<body>
+<main>
+    <div class="px-4 py-6 sm:px-0">
+        <!-- Welcome Header -->
+        <div class="border-b border-gray-200 pb-4 mb-6">
+            <h1 class="text-3xl font-bold leading-tight text-gray-900">
+                <i class="fas fa-home mr-3 text-primary-600"></i>
+                Welcome back<span th:if="${customer}" th:text="', ' + ${customer.fullName}"></span>!
+            </h1>
+            <p class="mt-2 text-gray-600">Discover amazing products and manage your shopping experience</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Available Products -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shopping-bag text-2xl text-blue-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Available Products</dt>
+                                <dd class="text-lg font-medium text-gray-900" th:text="${availableProductsCount}">0</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/customer/products" class="font-medium text-blue-700 hover:text-blue-900">
+                            Browse products
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Items -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shopping-cart text-2xl text-green-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Items in Cart</dt>
+                                <dd class="text-lg font-medium text-gray-900" th:text="${cartItemsCount}">0</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                        <a href="/customer/cart" class="font-medium text-green-700 hover:text-green-900">
+                            View cart
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-user text-2xl text-purple-600"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Account Status</dt>
+                                <dd class="text-lg font-medium text-gray-900">Active</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm">
+                            <span class="font-medium text-purple-700">
+                                Member since 2024
+                                <i class="fas fa-check-circle ml-1"></i>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Products -->
+        <div class="bg-white shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                    <i class="fas fa-star mr-2 text-yellow-500"></i>
+                    Featured Products
+                </h3>
+                <div th:if="${recentProducts != null and !recentProducts.isEmpty()}">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div th:each="product : ${recentProducts}" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="aspect-w-16 aspect-h-9 mb-3">
+                                <img th:src="${product.imageUrl != null and !product.imageUrl.isEmpty()} ? ${product.imageUrl} : 'https://via.placeholder.com/300x200?text=No+Image'"
+                                     th:alt="${product.name}"
+                                     class="w-full h-32 object-cover rounded-md">
+                            </div>
+                            <h4 class="font-medium text-gray-900 truncate" th:text="${product.name}">Product Name</h4>
+                            <p class="text-sm text-gray-600 mt-1 truncate" th:text="${product.description}">Product description</p>
+                            <div class="mt-3 flex items-center justify-between">
+                                    <span class="text-lg font-semibold text-green-600" th:text="'
+                             + ${product.price}">$0.00</span>
+                                <form th:action="@{/customer/cart/add}" method="post" class="inline">
+                                    <input type="hidden" name="productId" th:value="${product.id}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit"
+                                            th:disabled="${product.stockQuantity == 0}"
+                                            class="bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white px-3 py-1 rounded-md text-sm font-medium">
+                                        <i class="fas fa-plus mr-1"></i>
+                                        <span th:if="${product.stockQuantity > 0}">Add to Cart</span>
+                                        <span th:if="${product.stockQuantity == 0}">Out of Stock</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-primary-600 bg-primary-100 hover:bg-primary-200">
+                            <i class="fas fa-eye mr-2"></i>
+                            View All Products
+                        </a>
+                    </div>
+                </div>
+                <div th:if="${recentProducts == null or recentProducts.isEmpty()}" class="text-center py-8">
+                    <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
+                    <p class="text-gray-500">No products available at the moment. Check back soon!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
