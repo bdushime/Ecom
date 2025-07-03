@@ -5,70 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Products - E-commerce</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            900: '#1e3a8a'
-                        }
-                    }
-                }
-            }
+    <style>
+        .nav-link:hover {
+            background-color: #374151;
         }
-    </script>
+
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-white">
 <!-- Navigation Bar -->
-<nav class="bg-white shadow-lg border-b border-gray-200">
+<nav class="bg-black border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
-                <i class="fas fa-shopping-bag text-primary-600 text-2xl mr-3"></i>
-                <span class="text-xl font-bold text-gray-900">E-Commerce Store</span>
+                <span class="text-xl font-bold text-white">E-Commerce Store</span>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <a href="/customer/dashboard" class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-home mr-1"></i>Dashboard
+            <div class="flex items-center space-x-1">
+                <a href="/customer/dashboard" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800">
+                    Dashboard
                 </a>
-                <a href="/customer/products" class="text-primary-600 bg-primary-50 px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-shopping-cart mr-1"></i>Products
+                <a href="/customer/products" class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">
+                    Products
                 </a>
-                <a href="/customer/cart" class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-shopping-bag mr-1"></i>Cart
+                <a href="/customer/cart" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800">
+                    Cart
                 </a>
+            </div>
 
-                <div class="flex items-center space-x-3">
-                    <span class="text-gray-700 text-sm">Welcome, Customer!</span>
-                    <form th:action="@{/logout}" method="post" class="inline">
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
-                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
-                        </button>
-                    </form>
+            <div class="flex items-center">
+                <div class="flex items-center mr-4">
+                    <div class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center mr-2">
+                        <span class="text-white text-sm font-medium">C</span>
+                    </div>
+                    <span class="text-sm text-gray-300">Customer</span>
                 </div>
+                <form th:action="@{/logout}" method="post" class="inline">
+                    <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded text-sm font-medium">
+                        Logout
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </nav>
 
 <!-- Flash Messages -->
-<div th:if="${success}" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md mx-4 mt-4" role="alert">
+<div th:if="${success}" class="bg-gray-100 border border-gray-400 text-gray-800 px-4 py-3 rounded-md mx-4 mt-4" role="alert">
     <div class="flex">
-        <i class="fas fa-check-circle mr-2 mt-0.5"></i>
+        <span class="mr-2 mt-0.5">✓</span>
         <span th:text="${success}"></span>
     </div>
 </div>
 
-<div th:if="${error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md mx-4 mt-4" role="alert">
+<div th:if="${error}" class="bg-gray-200 border border-gray-500 text-gray-900 px-4 py-3 rounded-md mx-4 mt-4" role="alert">
     <div class="flex">
-        <i class="fas fa-exclamation-circle mr-2 mt-0.5"></i>
+        <span class="mr-2 mt-0.5">!</span>
         <span th:text="${error}"></span>
     </div>
 </div>
@@ -78,8 +73,7 @@
     <div class="px-4 py-6 sm:px-0">
         <!-- Page Header -->
         <div class="border-b border-gray-200 pb-4 mb-6">
-            <h1 class="text-3xl font-bold leading-tight text-gray-900">
-                <i class="fas fa-shopping-bag mr-3 text-primary-600"></i>
+            <h1 class="text-3xl font-bold leading-tight text-black">
                 Browse Products
             </h1>
             <p class="mt-2 text-gray-600">Discover amazing products and add them to your cart</p>
@@ -89,21 +83,14 @@
         <div class="mb-6">
             <form th:action="@{/customer/products}" method="get" class="flex space-x-4">
                 <div class="flex-1">
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </div>
-                        <input type="text" name="search" th:value="${search}"
-                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                               placeholder="Search products...">
-                    </div>
+                    <input type="text" name="search" th:value="${search}"
+                           class="block w-full px-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                           placeholder="Search products...">
                 </div>
-                <button type="submit" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    <i class="fas fa-search mr-2"></i>
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-black bg-white hover:bg-gray-50">
                     Search
                 </button>
-                <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    <i class="fas fa-times mr-2"></i>
+                <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-black bg-white hover:bg-gray-50">
                     Clear
                 </a>
             </form>
@@ -112,7 +99,7 @@
         <!-- Products Grid -->
         <div th:if="${products != null and !products.isEmpty()}">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <div th:each="product : ${products}" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div th:each="product : ${products}" class="product-card bg-white border border-gray-300 rounded-lg shadow overflow-hidden">
                     <!-- Product Image -->
                     <div class="aspect-w-1 aspect-h-1 w-full">
                         <img th:src="${product.imageUrl != null and !product.imageUrl.isEmpty()} ? ${product.imageUrl} : 'https://via.placeholder.com/300x300?text=No+Image'"
@@ -122,22 +109,22 @@
 
                     <!-- Product Info -->
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 truncate" th:text="${product.name}">Product Name</h3>
+                        <h3 class="text-lg font-semibold text-black truncate" th:text="${product.name}">Product Name</h3>
                         <p class="text-sm text-gray-600 mt-1 line-clamp-2" th:text="${product.description}">Product description goes here...</p>
 
                         <!-- Price and Stock -->
                         <div class="mt-3 flex items-center justify-between">
                             <div>
-                                <span class="text-2xl font-bold text-green-600" th:text="'$' + ${product.price}">$0.00</span>
+                                <span class="text-2xl font-bold text-black" th:text="'$' + ${product.price}">$0.00</span>
                             </div>
                             <div class="text-right">
-                                    <span th:if="${product.stockQuantity > 10}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span th:if="${product.stockQuantity > 10}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800">
                                         In Stock
                                     </span>
-                                <span th:if="${product.stockQuantity > 0 and product.stockQuantity <= 10}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                        <span th:text="${product.stockQuantity} + ' left'">Low Stock</span>
-                                    </span>
-                                <span th:if="${product.stockQuantity == 0}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                <span th:if="${product.stockQuantity > 0 and product.stockQuantity <= 10}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-300 text-gray-800">
+                                    <span th:text="${product.stockQuantity} + ' left'">Low Stock</span>
+                                </span>
+                                <span th:if="${product.stockQuantity == 0}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-500 text-white">
                                         Out of Stock
                                     </span>
                             </div>
@@ -149,15 +136,14 @@
                                 <input type="hidden" name="productId" th:value="${product.id}">
                                 <div class="flex-1">
                                     <select name="quantity" th:disabled="${product.stockQuantity == 0}"
-                                            class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md disabled:bg-gray-100">
+                                            class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md disabled:bg-gray-100">
                                         <option th:each="i : ${#numbers.sequence(1, product.stockQuantity > 10 ? 10 : product.stockQuantity)}"
                                                 th:value="${i}" th:text="${i}">1</option>
                                     </select>
                                 </div>
                                 <button type="submit"
                                         th:disabled="${product.stockQuantity == 0}"
-                                        class="flex-1 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                                    <i class="fas fa-cart-plus mr-2"></i>
+                                        class="flex-1 bg-black hover:bg-gray-800 disabled:bg-gray-400 text-white px-4 py-2 rounded-md text-sm font-medium">
                                     <span th:if="${product.stockQuantity > 0}">Add to Cart</span>
                                     <span th:if="${product.stockQuantity == 0}">Out of Stock</span>
                                 </button>
@@ -170,12 +156,14 @@
 
         <!-- Empty State -->
         <div th:if="${products == null or products.isEmpty()}" class="text-center py-12">
-            <i class="fas fa-search text-6xl text-gray-400 mb-4"></i>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">
+            <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <span class="text-4xl text-gray-500">📦</span>
+            </div>
+            <h3 class="text-lg font-medium text-black mb-2">
                 <span th:if="${search != null and !search.isEmpty()}">No products found</span>
                 <span th:if="${search == null or search.isEmpty()}">No products available</span>
             </h3>
-            <p class="text-gray-500 mb-6">
+            <p class="text-gray-600 mb-6">
                     <span th:if="${search != null and !search.isEmpty()}">
                         Try adjusting your search criteria or browse all products.
                     </span>
@@ -184,8 +172,7 @@
                     </span>
             </p>
             <div th:if="${search != null and !search.isEmpty()}">
-                <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-                    <i class="fas fa-eye mr-2"></i>
+                <a href="/customer/products" class="inline-flex items-center px-4 py-2 border border-black text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800">
                     Browse All Products
                 </a>
             </div>
