@@ -6,69 +6,69 @@
     <title>Register - E-commerce</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="bg-white min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-gray-900">Create your account</h2>
+        <h2 class="text-3xl font-extrabold text-black">Create your account</h2>
         <p class="mt-2 text-sm text-gray-600">
-            Already have an account? <a href="/login" class="font-medium text-blue-600 hover:text-blue-500">Sign in here</a>
+            Already have an account? <a href="/login" class="font-medium text-black hover:text-gray-700 underline">Sign in here</a>
         </p>
     </div>
 </div>
 
 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div class="bg-white py-8 px-4 shadow border border-gray-300 sm:rounded-lg sm:px-10">
         <form th:action="@{/register}" th:object="${user}" method="post" class="space-y-6">
 
             <div>
-                <label  class="block text-sm font-medium text-gray-700">Full Name</label>
+                <label class="block text-sm font-medium text-black">Full Name</label>
                 <input th:field="*{fullName}" type="text" required
-                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                        placeholder="Enter your full name">
-                <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="mt-1 text-sm text-red-600"></p>
+                <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="mt-1 text-sm text-gray-800"></p>
             </div>
 
             <div>
-                <label  class="block text-sm font-medium text-gray-700">Username</label>
+                <label class="block text-sm font-medium text-black">Username</label>
                 <input th:field="*{username}" type="text" required
-                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                        placeholder="Choose a username">
-                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="mt-1 text-sm text-red-600"></p>
-                <p th:if="${usernameError}" th:text="${usernameError}" class="mt-1 text-sm text-red-600"></p>
+                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="mt-1 text-sm text-gray-800"></p>
+                <p th:if="${usernameError}" th:text="${usernameError}" class="mt-1 text-sm text-gray-800"></p>
             </div>
 
             <div>
-                <label  class="block text-sm font-medium text-gray-700">Email</label>
+                <label class="block text-sm font-medium text-black">Email</label>
                 <input th:field="*{email}" type="email" required
-                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                        placeholder="Enter your email">
-                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="mt-1 text-sm text-red-600"></p>
-                <p th:if="${emailError}" th:text="${emailError}" class="mt-1 text-sm text-red-600"></p>
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="mt-1 text-sm text-gray-800"></p>
+                <p th:if="${emailError}" th:text="${emailError}" class="mt-1 text-sm text-gray-800"></p>
             </div>
 
             <div>
-                <label  class="block text-sm font-medium text-gray-700">Password</label>
+                <label class="block text-sm font-medium text-black">Password</label>
                 <input th:field="*{password}" type="password" required
-                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                        placeholder="Create a password">
-                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="mt-1 text-sm text-red-600"></p>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="mt-1 text-sm text-gray-800"></p>
             </div>
 
             <div>
-                <label  class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <label class="block text-sm font-medium text-black">Confirm Password</label>
                 <input th:field="*{confirmPassword}" type="password" required
-                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                       class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                        placeholder="Confirm your password">
-                <p th:if="${passwordError}" th:text="${passwordError}" class="mt-1 text-sm text-red-600"></p>
+                <p th:if="${passwordError}" th:text="${passwordError}" class="mt-1 text-sm text-gray-800"></p>
             </div>
 
-            <div th:if="${error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md">
+            <div th:if="${error}" class="bg-gray-200 border border-gray-500 text-gray-900 px-4 py-3 rounded-md">
                 <span th:text="${error}">Error message</span>
             </div>
 
             <div>
                 <button type="submit"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     Create Account
                 </button>
             </div>
